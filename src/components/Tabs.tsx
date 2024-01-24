@@ -8,7 +8,7 @@ import {
 } from "@material-tailwind/react";
 import React from "react";
 import { QuizCard } from "./QuizCard";
-import { AddQuizForm } from "./addQuizForm";
+import { DefaultStepper } from "./Stepper";
 
 export function TabsWithIcon() {
   const data = [
@@ -22,7 +22,7 @@ export function TabsWithIcon() {
       label: "Add Quiz",
       value: "add-quiz",
       icon: UserCircleIcon,
-      desc: <AddQuizForm />,
+      desc: <DefaultStepper />,
     },
   ];
   return (
