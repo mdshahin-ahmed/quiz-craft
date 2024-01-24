@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 export function QuizCard({ children }: { children: ReactNode }) {
   return (
-    <Card placeholder={""} className="mt-6 w-full">
+    <Card placeholder={""} className="mt-6 w-full h-full">
       <CardBody placeholder={""}>{children}</CardBody>
     </Card>
   );

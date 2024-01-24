@@ -1,27 +1,49 @@
 import { Step, Stepper } from "@material-tailwind/react";
-import React from "react";
+import { setActiveStepper } from "../redux/features/stepper/stepperSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { ReactNode } from "react";
 
-export function DefaultStepper() {
-  const [activeStep, setActiveStep] = React.useState(0);
+type TStepperProps = {
+  steps: {
+    name: string;
+    value: number;
+    component: ReactNode;
+  }[];
+};
+
+export function DefaultStepper({ steps }: TStepperProps) {
+  const { activeStep } = useAppSelector((state) => state.stepper);
+
+  const dispatch = useAppDispatch();
 
   return (
     <div className="w-full py-4 px-8">
       <Stepper placeholder={""} activeStep={activeStep}>
-        <Step
+        {/* <Step
           placeholder={""}
-          onClick={() => setActiveStep(0)}
+          onClick={() => dispatch(setActiveStepper(0))}
           className="px-8 w-fit"
         >
           Quiz list
         </Step>
         <Step
           placeholder={""}
-          onClick={() => setActiveStep(1)}
+          onClick={() => dispatch(setActiveStepper(1))}
           className="px-8 w-fit"
         >
           Add Quiz
-        </Step>
+        </Step> */}
+        {steps.map((step) => (
+          <Step
+            placeholder={""}
+            onClick={() => dispatch(setActiveStepper(step.value))}
+            className="px-8 w-fit"
+          >
+            {step.name}
+          </Step>
+        ))}
       </Stepper>
+      <div>{steps[activeStep].component}</div>
     </div>
   );
 }
