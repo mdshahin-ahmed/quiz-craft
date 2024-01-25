@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Square3Stack3DIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import {
   Button,
@@ -27,7 +28,11 @@ const steps = [
   {
     value: 1,
     name: "Add Quiz",
-    component: <AddQuizForm />,
+    component: (
+      <div className="p-4">
+        <AddQuizForm />,
+      </div>
+    ),
   },
 ];
 
@@ -41,7 +46,7 @@ export function TabsWithIcon() {
       icon: Square3Stack3DIcon,
       desc: (
         <>
-          {modules?.data?.map((module) => (
+          {modules?.data?.map((module: any) => (
             <QuizCard>
               <Typography
                 placeholder={""}

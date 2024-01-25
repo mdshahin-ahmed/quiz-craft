@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import { Select, Option, Spinner } from "@material-tailwind/react";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { setActiveStepper } from "../redux/features/stepper/stepperSlice";
@@ -23,7 +24,7 @@ export function SelectModule() {
         value={moduleId}
         onChange={(value) => {
           const moduleTitle = modules.data.find(
-            (module) => module._id === value
+            (module: any) => module._id === value
           ).title;
           console.log(moduleTitle);
 
@@ -33,7 +34,7 @@ export function SelectModule() {
         placeholder={""}
         label="Select Version"
       >
-        {modules?.data?.map((module) => (
+        {modules?.data?.map((module: any) => (
           <Option value={module._id}>{module.title}</Option>
         ))}
       </Select>
