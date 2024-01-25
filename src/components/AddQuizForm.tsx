@@ -1,10 +1,12 @@
 import { Button, Card, Input, Typography } from "@material-tailwind/react";
+import { useAppSelector } from "../redux/hooks";
 
 export function AddQuizForm() {
+  const { moduleTitle } = useAppSelector((state) => state.module);
   return (
     <Card placeholder={""} color="transparent" shadow={false}>
       <Typography placeholder={""} variant="h4" color="blue-gray">
-        Add Quiz{" "}
+        {moduleTitle}
       </Typography>
       <Typography placeholder={""} color="gray" className="mt-1 font-normal">
         Please add your quiz below

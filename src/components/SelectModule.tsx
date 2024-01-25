@@ -1,12 +1,13 @@
 import { Select, Option, Spinner } from "@material-tailwind/react";
-import { useAppDispatch } from "../redux/hooks";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { setActiveStepper } from "../redux/features/stepper/stepperSlice";
-import { useGetAllModulesQuery } from "../redux/api/baseApi";
+import { setSelectedModule } from "../redux/features/module/moduleSlice";
+import { useGetAllModulesQuery } from "../redux/features/module/moduleApi";
 
 export function SelectModule() {
   const dispatch = useAppDispatch();
   const { data: modules, isLoading } = useGetAllModulesQuery("");
-  console.log(modules);
+  const { moduleId } = useAppSelector((state) => state.module);
 
   if (isLoading) {
     return (
@@ -19,18 +20,21 @@ export function SelectModule() {
   return (
     <div className="w-72 ">
       <Select
-        onChange={(value) => dispatch(setActiveStepper(1))}
+        value={moduleId}
+        onChange={(value) => {
+          const moduleTitle = modules.data.find(
+            (module) => module._id === value
+          ).title;
+          console.log(moduleTitle);
+
+          dispatch(setSelectedModule({ moduleTitle, moduleId: value }));
+          dispatch(setActiveStepper(1));
+        }}
         placeholder={""}
         label="Select Version"
       >
-        {/* <Option>Material Tailwind HTML</Option>
-        <Option>Material Tailwind React</Option>
-        <Option>Material Tailwind Vue</Option>
-        <Option>Material Tailwind Angular</Option>
-        <Option>Material Tailwind Svelte</Option> */}
-
         {modules?.data?.map((module) => (
-          <Option value={module.id}>{module.title}</Option>
+          <Option value={module._id}>{module.title}</Option>
         ))}
       </Select>
     </div>
