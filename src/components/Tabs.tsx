@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { Square3Stack3DIcon, UserCircleIcon } from "@heroicons/react/24/solid";
 import {
-  Button,
   Tab,
   TabPanel,
   Tabs,
@@ -10,11 +9,12 @@ import {
   Typography,
 } from "@material-tailwind/react";
 import React from "react";
-import { QuizCard } from "./QuizCard";
-import { DefaultStepper } from "./Stepper";
-import { SelectModule } from "./SelectModule";
-import { AddQuizForm } from "./AddQuizForm";
 import { useGetAllModulesQuery } from "../redux/features/module/moduleApi";
+import { AddQuizForm } from "./AddQuizForm";
+import { QuizCard } from "./QuizCard";
+import { QuizModal } from "./QuizModal";
+import { SelectModule } from "./SelectModule";
+import { DefaultStepper } from "./Stepper";
 const steps = [
   {
     value: 0,
@@ -57,7 +57,7 @@ export function TabsWithIcon() {
                 {module.title}
               </Typography>
               <div className="flex justify-end">
-                <Button placeholder={""}>Start quiz</Button>
+                <QuizModal moduleId={module._id} />
               </div>
             </QuizCard>
           ))}
