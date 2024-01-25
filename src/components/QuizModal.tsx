@@ -15,7 +15,6 @@ export function QuizModal({ moduleId }: { moduleId: string }) {
   const [open, setOpen] = React.useState(false);
 
   const { data: quizzes, isLoading } = useGetAllQuizQuery(moduleId);
-  console.log(quizzes);
 
   const { currentQuestionIndex } = useAppSelector((state) => state.quiz);
   const dispatch = useAppDispatch();
